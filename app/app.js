@@ -1,24 +1,31 @@
 var express = require('express');
 var request = require('request');
 var phantom = require('phantom');
+var exphbs  = require('express-handlebars');
 var data = require('./pages.json');
 
 var app = express();
-
 var port = 8090;
-
-app.get('/status/ping', function(req, res) {
-    res.send('pong');
+var hbs = exphbs.create({
+    defaultLayout: 'main',
+    partialsDir: __dirname + '/views',
 });
 
-app.get('/generate', function(req, res) {
-    var response;
-    var temp;
+app.engine('handlebars', hbs.engine);
+
+app.set('view engine', 'handlebars');
+app.set('views', __dirname + '/views/');
+
+app.get('/status/ping', function(req, res) {
+res.send('pong');
+});
+
+app.get('/generate/:id', function(req, res) {
     var tempResponse;
 
     phantom.create(function (ph) {
         ph.createPage(function (page) {
-            page.open(data.pages[0], function () {
+            page.open(data.pages[req.params.id], function () {
                 page.evaluate(function (remoteSiteBody) {
                     var branding = document.querySelector('#branding');
                     var attrTable = branding.querySelector('.table-c');
@@ -32,8 +39,13 @@ app.get('/generate', function(req, res) {
                     };
 
                     return tempResponse;
-                }, function (result) {
-                    console.log(result);
+                }, function (details) {
+
+                    res.render('index', {
+                        layout: false,
+                        details: details
+                    });
+                    console.log(details);
                     ph.exit();
                 });
 

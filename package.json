@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/pfryga/express-page-parser/issues"
   },
-  "homepage": "https://github.com/pfryga/express-page-parser"
+  "homepage": "https://github.com/pfryga/express-page-parser",
+  "dependencies": {
+    "express": "^4.12.2",
+    "express-handlebars": "^1.2.2",
+    "phantom": "^0.7.2",
+    "request": "^2.53.0"
+  }
 }
