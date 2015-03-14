@@ -1,0 +1,19 @@
+{
+  "name": "express-page-parser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app/app.js",
+  "scripts": {
+    "serve": "node app/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pfryga/express-page-parser.git"
+  },
+  "author": "piotr.fryga@allegro.pl",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pfryga/express-page-parser/issues"
+  },
+  "homepage": "https://github.com/pfryga/express-page-parser"
+}
